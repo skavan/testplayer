@@ -285,6 +285,7 @@ Public Class frmMain
     End Sub
 
     Sub UpdateGUIElements()
+
         RTBAddText(RichTextBox1, trackdata.Title, Color.White, 20, True, True, True)
         RTBAddText(RichTextBox1, trackdata.Artist, Color.White, 20, False, False)
         '// handle the case where Artist and AlbumArtist are  different
@@ -346,6 +347,7 @@ Public Class frmMain
                 PictureBox1.Image = Nothing
                 'PictureBox1.WaitOnLoad = False
                 PictureBox1.LoadAsync(trackdata.AlbumArtURI)
+                SendToClients("AlbumART arrived", trackdata.AlbumArtURI)
             End If
         Else
             PictureBox1.Image = Nothing           'delete current
@@ -427,4 +429,15 @@ Public Class frmMain
         'hubContext = GlobalHost.ConnectionManager.GetHubContext(Of MyHub)()
         WriteToConsole("Server Started @ " & SERVERURL)
     End Sub
+
+#Region "SignalR"
+    Private Sub SendToClients(message As String, payload As String)
+        If Hub IsNot Nothing Then
+            Hub.Send(message, payload)
+            WriteToConsole("Server Sending " & message & "|" & payload)
+        Else
+            WriteToConsole("No Clients to send to.")
+        End If
+    End Sub
+#End Region
 End Class

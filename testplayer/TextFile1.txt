@@ -7,7 +7,7 @@ Upgrade ALL Packages
 install-package Microsoft.Owin.StaticFiles
 install-package Microsoft.Owin.SelfHost
 
-'// Edit app.config
+'// Edit app.config - probably not needed if everything is uptodate!
 
 Load In signalIR Class
 
@@ -20,5 +20,21 @@ Add WebContent and Scripts folders
 
 RUN AS ADMINISTRATOR.
 BASIC FUNCTIONALITY IS DONE!
+Write SignalR Broadcast Function: 
+Private Sub SendToClients(message As String, payload As String)
+        If Hub IsNot Nothing Then
+            Hub.Send(message, payload)
+            WriteToConsole("Server Sending " & message & "|" & payload)
+        Else
+            WriteToConsole("No Clients to send to.")
+        End If
+End Sub
+
+Wire it in...
+WORKING!!
+
+Now, let's get the local server working!
+
+
 
 
