@@ -1,6 +1,8 @@
 ﻿
 'status - 2 tags:A,l,j,C,N,u,t,y,L,c,K,o,r
 Imports asyncSockets
+Imports System.Threading.Tasks
+Imports Microsoft.Owin.Hosting
 
 Public Class frmMain
     Dim metadata As New Dictionary(Of String, String)
@@ -10,6 +12,13 @@ Public Class frmMain
 
     Dim trackdata As New cTrackInfo
     Dim playlist As New cplayListInfo
+
+    Const SERVERURL As String = "http://+:8080"
+    Private SignalR As IDisposable
+    Private Delegate Sub UpdateTxt(message As String)
+
+    '// a local reference to the instance of the Hub that clients are using
+    Public Hub As MyHub
 
 
     Enum eStreamType
@@ -69,12 +78,24 @@ Public Class frmMain
     End Sub
 
     Private Sub TearDown()
+        If SignalR IsNot Nothing Then
+            SignalR.Dispose()
+        End If
         If Client.IsConnected Then Client.ShutDown()
     End Sub
 
 #End Region
 
-#Region "RichTextBox Routines"
+#Region "RichTextBox & TextBox Routines"
+    Public Sub WriteToConsole(message As String)
+        If Me.InvokeRequired Then
+            Me.Invoke(New UpdateTxt(AddressOf WriteToConsole), {message})
+        Else
+            'TextBox1.SafeInvoke(Function(y As TextBox) InlineAssignHelper(y.Text, y.Text & message & vbCrLf))
+            Debug.Print(message & vbCrLf)
+        End If
+    End Sub
+
 
     Private Sub RTBAddText(rtb As RichTextBox, text As String, textColor As Color, size As Single, Optional isBold As Boolean = False, Optional CRLF As Boolean = True, Optional clearBox As Boolean = False)
         If clearBox Then
@@ -348,6 +369,7 @@ Public Class frmMain
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         Init()
+        MainForm = Me
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -390,4 +412,19 @@ Public Class frmMain
 #End Region
 
 
+    Private Sub btnStartServer_Click(sender As Object, e As EventArgs) Handles btnStartServer.Click
+        Task.Run(AddressOf StartWebServer)    '// launch server on its own thread
+
+    End Sub
+
+    Private Sub StartWebServer()
+        Try
+            WebApp.Start(SERVERURL)
+        Catch ex As Exception
+            MsgBox("Server Failed To Start")
+            Exit Sub
+        End Try
+        'hubContext = GlobalHost.ConnectionManager.GetHubContext(Of MyHub)()
+        WriteToConsole("Server Started @ " & SERVERURL)
+    End Sub
 End Class

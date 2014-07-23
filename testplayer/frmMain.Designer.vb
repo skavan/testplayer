@@ -27,7 +27,6 @@ Partial Class frmMain
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
@@ -38,13 +37,15 @@ Partial Class frmMain
         Me.btnDisconnect = New System.Windows.Forms.Button()
         Me.btnSend = New System.Windows.Forms.Button()
         Me.txtSend = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnStartServer = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -119,18 +120,6 @@ Partial Class frmMain
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Image = Global.testplayer.My.Resources.Resources.No_album
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.TableLayoutPanel1.SetRowSpan(Me.PictureBox1, 2)
-        Me.PictureBox1.Size = New System.Drawing.Size(476, 440)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -162,6 +151,7 @@ Partial Class frmMain
         Me.TableLayoutPanel2.Controls.Add(Me.btnDisconnect, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.btnSend, 5, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txtSend, 4, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnStartServer, 4, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 449)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -251,6 +241,27 @@ Partial Class frmMain
         Me.txtSend.TabIndex = 9
         Me.txtSend.Text = "status - 2 tags:A,l,j,C,N,u,t,y,L,c,K,o,r"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Image = Global.testplayer.My.Resources.Resources.No_album
+        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.TableLayoutPanel1.SetRowSpan(Me.PictureBox1, 2)
+        Me.PictureBox1.Size = New System.Drawing.Size(476, 440)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'btnStartServer
+        '
+        Me.btnStartServer.Location = New System.Drawing.Point(557, 37)
+        Me.btnStartServer.Name = "btnStartServer"
+        Me.btnStartServer.Size = New System.Drawing.Size(147, 79)
+        Me.btnStartServer.TabIndex = 10
+        Me.btnStartServer.Text = "StartServer"
+        Me.btnStartServer.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 28.0!)
@@ -268,9 +279,9 @@ Partial Class frmMain
         Me.SplitContainer1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -290,5 +301,6 @@ Partial Class frmMain
     Friend WithEvents txtIP As System.Windows.Forms.TextBox
     Friend WithEvents txtPort As System.Windows.Forms.TextBox
     Friend WithEvents txtSend As System.Windows.Forms.TextBox
+    Friend WithEvents btnStartServer As System.Windows.Forms.Button
 
 End Class

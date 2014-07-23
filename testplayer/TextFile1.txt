@@ -1,2 +1,24 @@
 ﻿Install-Package Microsoft.AspNet.SignalR.SelfHost
 Install-Package Microsoft.Owin.Cors
+
+Upgrade ALL Packages
+
+
+install-package Microsoft.Owin.StaticFiles
+install-package Microsoft.Owin.SelfHost
+
+'// Edit app.config
+
+Load In signalIR Class
+
+Insert Mainform = Me in startup to link Hub to MainForm
+
+Add WebServer Start Routine:
+Task.Run(AddressOf LaunchWebServer)    '// launch server on its own thread
+
+Add WebContent and Scripts folders
+
+RUN AS ADMINISTRATOR.
+BASIC FUNCTIONALITY IS DONE!
+
+
