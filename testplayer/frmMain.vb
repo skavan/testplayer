@@ -7,6 +7,11 @@ Public Class frmMain
     Dim WithEvents Client As New IPClient
     Delegate Sub HandlesMessage(Message As clsClientMessage)
     Const MY_SERVER As String = "http://192.168.1.126:9000"
+
+    Dim trackdata As New cTrackInfo
+    Dim playlist As New cplayListInfo
+
+
     Enum eStreamType
         local
         radio
@@ -15,10 +20,9 @@ Public Class frmMain
         rhapsody
         unknown
     End Enum
+
+#Region "Embedded Classes"
     Class cTrackInfo
-
-
-
         Property ID As String
 
         Property AlbumArtist As String = ""
@@ -54,8 +58,10 @@ Public Class frmMain
 
     End Class
 
-    Dim trackdata As New cTrackInfo
-    Dim playlist As New cplayListInfo
+
+#End Region
+
+
 
 #Region "Initialization and TearDown"
     Private Sub Init()
@@ -328,6 +334,17 @@ Public Class frmMain
 
 #Region "Form Events"
 
+    Private Sub PictureBox1_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles PictureBox1.LoadCompleted
+        If e.Error IsNot Nothing Then
+            Debug.Print("ERROR: " & e.Error.Message)
+        ElseIf e.Cancelled Then
+            Debug.Print("CANCELLED: " & e.Cancelled)
+        Else
+            Debug.Print("Load Complete")
+        End If
+
+        'Debug.Print("Picture Loaded?:" & e.Error.Message & "|" & e.Cancelled.ToString & "|" & e.UserState.ToString)
+    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         Init()
@@ -372,16 +389,5 @@ Public Class frmMain
     End Sub
 #End Region
 
-    Private Sub PictureBox1_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles PictureBox1.LoadCompleted
-        If e.Error IsNot Nothing Then
-            Debug.Print("ERROR: " & e.Error.Message)
-        ElseIf e.Cancelled Then
-            Debug.Print("CANCELLED: " & e.Cancelled)
-        Else
-            Debug.Print("Load Complete")
-        End If
-
-        'Debug.Print("Picture Loaded?:" & e.Error.Message & "|" & e.Cancelled.ToString & "|" & e.UserState.ToString)
-    End Sub
 
 End Class
