@@ -35,6 +35,13 @@ WORKING!!
 
 Now, let's get the local server working!
 
+USe Package Manager to install:
+- JQUERY 
+- Microsoft ASP.NET SignalR Javascript Client
+(make sure you pick the right solution)
 
+Copy Web Page to WebContent directory. (i.e. default.html)
+
+WORKING!!!!
 
 
